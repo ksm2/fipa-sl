@@ -1,7 +1,7 @@
 {
     "name": "corny-phoenix/fipa-sl",
     "description": "PHP Library for serializing FIPA SL messages.",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "type": "library",
     "keywords": [
         "fipa",
