@@ -1,7 +1,7 @@
 {
     "name": "corny-phoenix/fipa-sl",
     "description": "PHP Library for serializing FIPA SL messages.",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "type": "library",
     "keywords": [
         "fipa",
@@ -14,7 +14,7 @@
         "kqml",
         "tuples"
     ],
-    "homepage": "",
+    "homepage": "https://github.com/CornyPhoenix/fipa-sl",
     "time": "2015-04-16",
     "license": "MIT",
     "authors": [
@@ -31,7 +31,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "~4.6",
-        "codeclimate-test-reporter": "dev-master"
+        "codeclimate/php-test-reporter": "0.1.2"
     },
     "autoload": {
         "psr-0": { "": "src/" }
