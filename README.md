@@ -1,7 +1,7 @@
-PHP FIPA SL 0.1.2
+PHP FIPA SL 0.1.3
 =================
 
-[![Build Status](https://travis-ci.org/CornyPhoenix/fipa-sl.svg?branch=master)](https://travis-ci.org/CornyPhoenix/fipa-sl) [![Code Climate](https://codeclimate.com/github/CornyPhoenix/fipa-sl/badges/gpa.svg)](https://codeclimate.com/github/CornyPhoenix/fipa-sl) [![Test Coverage](https://codeclimate.com/github/CornyPhoenix/fipa-sl/badges/coverage.svg)](https://codeclimate.com/github/CornyPhoenix/fipa-sl)
+[![Build Status](https://travis-ci.org/CornyPhoenix/fipa-sl.svg?branch=master)](https://travis-ci.org/CornyPhoenix/fipa-sl) [![Code Climate](https://codeclimate.com/github/CornyPhoenix/fipa-sl/badges/gpa.svg)](https://codeclimate.com/github/CornyPhoenix/fipa-sl) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/CornyPhoenix/fipa-sl/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/CornyPhoenix/fipa-sl/?branch=master)
 
 ## Introduction
 
@@ -14,7 +14,7 @@ This library adds serialization and unserialization support for SL-encoded objec
 Install it using Composer:
 
 ```
-composer require corny-phoenix/fipa-sl 0.1.2
+composer require corny-phoenix/fipa-sl 0.1.3
 ```
 
 [FIPA]: http://en.wikipedia.org/wiki/FIPA
