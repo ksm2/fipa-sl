@@ -32,6 +32,11 @@ interface TupleContext
     /**
      * @return string
      */
+    public function getFrameRegEx();
+
+    /**
+     * @return string
+     */
     public function getKeyDelimiter();
 
     /**

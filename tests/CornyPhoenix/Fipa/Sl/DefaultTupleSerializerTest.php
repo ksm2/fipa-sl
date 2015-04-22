@@ -75,15 +75,15 @@ class DefaultTupleSerializerTest extends \PHPUnit_Framework_TestCase
         $this->registry->registerTuple(new Done());
 
         /** @var Done $tuple */
-        $tuple = $this->serializer->unserialize('(done :key       (frame (frame2 "bar" -.2 42) ))');
+        $tuple = $this->serializer->unserialize('(done :test-key       (frame (frame2 "bar" -.2 42) ))');
         $this->assertNotNull($tuple);
         $this->assertInstanceOf(Done::class, $tuple);
 
         $this->assertNotEmpty($tuple->getTerms());
-        $this->assertTrue($tuple->hasParameter('key'));
+        $this->assertTrue($tuple->hasParameter('test-key'));
 
         /** @var Tuple $frame */
-        $frame = $tuple->getParameter('key');
+        $frame = $tuple->getParameter('test-key');
         $this->assertInstanceOf(GenericTuple::class, $frame);
         $this->assertEquals('frame', $frame->getFrame());
         $this->assertNotEmpty($frame->getTerms());
@@ -115,10 +115,10 @@ class DefaultTupleSerializerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSerialize()
     {
-        $tuple = new GenericTuple('frame');
-        $this->assertEquals('(frame )', $this->serializer->serialize($tuple));
-        $this->assertEquals('(frame )', $tuple->toString($this->context));
-        $this->assertEquals('(frame )', $tuple->__toString());
+        $tuple = new GenericTuple('test-frame');
+        $this->assertEquals('(test-frame )', $this->serializer->serialize($tuple));
+        $this->assertEquals('(test-frame )', $tuple->toString($this->context));
+        $this->assertEquals('(test-frame )', $tuple->__toString());
 
         $tuple = new GenericTuple('frame');
         $tuple->setNull('key');

@@ -16,6 +16,7 @@ class DefaultTupleContext implements TupleContext
     const KEY_SEPARATOR = ' ';
     const FRAME_SEPARATOR = ' ';
     const STRING_DELIMITER = '"';
+    const FRAME_REG_EX = '[\w-]';
 
     private static $instance = null;
 
@@ -113,5 +114,13 @@ class DefaultTupleContext implements TupleContext
     public function getClosingDelimiterRegEx()
     {
         return $this->closing;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFrameRegEx()
+    {
+        return self::FRAME_REG_EX;
     }
 }
