@@ -2,6 +2,8 @@
 
 namespace CornyPhoenix\Fipa\Sl;
 
+use CornyPhoenix\Fipa\Sl\Context\TupleContext;
+
 /**
  * @package CornyPhoenix\Fipa\Sl
  * @author moellers
@@ -11,9 +13,10 @@ class StringTerm extends LiteralTerm
 
     /**
      * @param string $string
-     * @return string|null
+     * @param Context\TupleContext|TupleContext $context
+     * @return null|string
      */
-    protected function parseString($string)
+    protected function parseString($string, TupleContext $context)
     {
         if ('null' === $string) {
             return null;
@@ -27,10 +30,6 @@ class StringTerm extends LiteralTerm
             return self::SL_FALSE;
         }
 
-        if ($string[0] === '"' && $string[0] === $string[strlen($string) - 1]) {
-            return substr($string, 1, strlen($string) - 2);
-        }
-
-        return strval($string);
+        return $context->decode($string);
     }
 }

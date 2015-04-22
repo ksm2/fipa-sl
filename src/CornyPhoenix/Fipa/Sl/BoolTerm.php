@@ -2,6 +2,8 @@
 
 namespace CornyPhoenix\Fipa\Sl;
 
+use CornyPhoenix\Fipa\Sl\Context\TupleContext;
+
 /**
  * @package CornyPhoenix\Fipa\Sl
  * @author moellers
@@ -11,9 +13,10 @@ class BoolTerm extends LiteralTerm
 
     /**
      * @param string $string
+     * @param TupleContext $context
      * @return bool|null
      */
-    protected function parseString($string)
+    protected function parseString($string, TupleContext $context)
     {
         if ('null' === $string) {
             return null;

@@ -108,6 +108,11 @@ class DefaultTupleSerializerTest extends \PHPUnit_Framework_TestCase
         $int = $frame2->getTerms()[2];
         $this->assertInstanceOf(IntegerTerm::class, $int);
         $this->assertEquals(42, $int->getValue());
+
+        $tuple = $this->serializer->unserialize('(test-frame "Hallo Welt \(\"Hello World\"\)")');
+        $this->assertNotEmpty($tuple->getTerms());
+        $this->assertInstanceOf(StringTerm::class, $tuple->getTerms()[0]);
+        $this->assertEquals('Hallo Welt ("Hello World")', $tuple->getString(0));
     }
 
     /**
@@ -147,8 +152,8 @@ class DefaultTupleSerializerTest extends \PHPUnit_Framework_TestCase
 
         $tuple = new GenericTuple('frame');
         $tuple->setString('key', "string");
-        $this->assertEquals('(frame :key "string")', $tuple->toString($this->context));
-        $this->assertEquals('(frame :key "string")', $tuple->__toString());
+        $this->assertEquals('(frame :key string)', $tuple->toString($this->context));
+        $this->assertEquals('(frame :key string)', $tuple->__toString());
 
         $tuple = new GenericTuple('frame1');
         $tuple->setParameter('key', new GenericTuple('frame2'));
@@ -171,5 +176,9 @@ class DefaultTupleSerializerTest extends \PHPUnit_Framework_TestCase
         $tuple->setParameter('key', new GenericTuple('frame3'));
         $this->assertEquals('(frame1 :key (frame3 ))', $tuple->toString($this->context));
         $this->assertEquals('(frame1 :key (frame3 ))', $tuple->__toString());
+
+        $tuple = new GenericTuple('test-frame');
+        $tuple->addTerm(new StringTerm('Hallo Welt ("Hello World")'));
+        $this->assertEquals('(test-frame "Hallo Welt \(\"Hello World\"\)")', $tuple->toString($this->context));
     }
 }
