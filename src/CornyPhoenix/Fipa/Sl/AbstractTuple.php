@@ -2,10 +2,8 @@
 
 namespace CornyPhoenix\Fipa\Sl;
 
-use CornyPhoenix\Fipa\Sl\Context\DefaultTupleContext;
 use CornyPhoenix\Fipa\Sl\Context\TupleContext;
 use CornyPhoenix\Fipa\Sl\Exception\FrameMustNotBeEmptyException;
-use CornyPhoenix\Fipa\Sl\Exception\ParsingException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -284,6 +282,50 @@ abstract class AbstractTuple implements LiteralTuple
     public function setNull($key)
     {
         $this->setParameter($key, new NullTerm());
+    }
+
+    /**
+     * @param bool $bool
+     * @return $this
+     */
+    public function addBool($bool)
+    {
+        return $this->addTerm(new BoolTerm($bool));
+    }
+
+    /**
+     * @param int $int
+     * @return $this
+     */
+    public function addInt($int)
+    {
+        return $this->addTerm(new IntegerTerm($int));
+    }
+
+    /**
+     * @param float $float
+     * @return $this
+     */
+    public function addFloat($float)
+    {
+        return $this->addTerm(new FloatTerm($float));
+    }
+
+    /**
+     * @param string $string
+     * @return $this
+     */
+    public function addString($string)
+    {
+        return $this->addTerm(new StringTerm($string));
+    }
+
+    /**
+     * @return $this
+     */
+    public function addNull()
+    {
+        return $this->addTerm(new NullTerm());
     }
 
     /**
