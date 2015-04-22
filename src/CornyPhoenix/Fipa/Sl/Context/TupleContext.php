@@ -32,6 +32,11 @@ interface TupleContext
     /**
      * @return string
      */
+    public function getFrameRegEx();
+
+    /**
+     * @return string
+     */
     public function getKeyDelimiter();
 
     /**
@@ -53,4 +58,27 @@ interface TupleContext
      * @return string
      */
     public function getStringDelimiter();
+
+    /**
+     * Encodes a string to an SL string.
+     *
+     * @param string $string
+     * @return string
+     */
+    public function encode($string);
+
+    /**
+     * Decodes an SL string.
+     *
+     * @param string $string
+     * @return string
+     */
+    public function decode($string);
+
+    /**
+     * @param string $string
+     * @param int $offset
+     * @return int
+     */
+    public function findEndOfString($string, $offset);
 }

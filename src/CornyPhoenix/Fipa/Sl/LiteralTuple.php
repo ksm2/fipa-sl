@@ -10,6 +10,12 @@ interface LiteralTuple extends Tuple
 {
 
     /**
+     * @param bool $bool
+     * @return $this
+     */
+    public function addBool($bool);
+
+    /**
      * @param string $key
      * @param bool|null $default
      * @return bool|null
@@ -22,6 +28,12 @@ interface LiteralTuple extends Tuple
      * @return $this
      */
     public function setBool($key, $bool);
+
+    /**
+     * @param int $int
+     * @return $this
+     */
+    public function addInt($int);
 
     /**
      * @param string $key
@@ -38,6 +50,12 @@ interface LiteralTuple extends Tuple
     public function setInt($key, $int);
 
     /**
+     * @param float $float
+     * @return $this
+     */
+    public function addFloat($float);
+
+    /**
      * @param string $key
      * @param float|null $default
      * @return float|null
@@ -52,6 +70,12 @@ interface LiteralTuple extends Tuple
     public function setFloat($key, $float);
 
     /**
+     * @param string $string
+     * @return $this
+     */
+    public function addString($string);
+
+    /**
      * @param string $key
      * @param string|null $default
      * @return string|null
@@ -64,6 +88,11 @@ interface LiteralTuple extends Tuple
      * @return $this
      */
     public function setString($key, $string);
+
+    /**
+     * @return $this
+     */
+    public function addNull();
 
     /**
      * @param string $key

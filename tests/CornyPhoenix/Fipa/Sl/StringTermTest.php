@@ -31,7 +31,7 @@ class StringTermTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("42.13", $term->getValue());
         $term = new StringTerm("foo");
         $this->assertEquals("foo", $term->getValue());
-        $this->assertEquals('"foo"', $term->toString($this->context));
+        $this->assertEquals('foo', $term->toString($this->context));
 
         $term = new StringTerm(false);
         $this->assertEquals(StringTerm::SL_FALSE, $term->getValue());
@@ -43,11 +43,11 @@ class StringTermTest extends \PHPUnit_Framework_TestCase
 
         $term->setValue(1337.42);
         $this->assertEquals("1337.42", $term->getValue());
-        $this->assertEquals('"1337.42"', $term->toString($this->context));
+        $this->assertEquals('1337.42', $term->toString($this->context));
 
         $term->setValue("string");
         $this->assertEquals("string", $term->getValue());
-        $this->assertEquals('"string"', $term->toString($this->context));
+        $this->assertEquals('string', $term->toString($this->context));
 
         $term->setValue("23.23");
         $this->assertEquals("23.23", $term->getValue());

@@ -2,6 +2,7 @@
 
 namespace CornyPhoenix\Fipa\Sl;
 
+use CornyPhoenix\Fipa\Sl\Context\DefaultTupleContext;
 use CornyPhoenix\Fipa\Sl\Context\TupleContext;
 
 /**
@@ -47,7 +48,7 @@ abstract class LiteralTerm implements Term
             return $this;
         }
 
-        $this->value = $this->parseString($value);
+        $this->value = $this->parseString($value, DefaultTupleContext::getInstance());
         return $this;
     }
 
@@ -70,7 +71,7 @@ abstract class LiteralTerm implements Term
         }
 
         if (is_string($this->value)) {
-            return $context->getStringDelimiter() . $this->value . $context->getStringDelimiter();
+            return $context->encode($this->value);
         }
 
         return strval($this->value);
@@ -83,13 +84,14 @@ abstract class LiteralTerm implements Term
      */
     final public function fromString($string, TupleContext $context)
     {
-        $this->value = $this->parseString($string);
+        $this->value = $this->parseString($string, $context);
         return $this;
     }
 
     /**
      * @param string $string
-     * @return string|int|float|bool|null
+     * @param TupleContext $context
+     * @return bool|float|int|null|string
      */
-    abstract protected function parseString($string);
+    abstract protected function parseString($string, TupleContext $context);
 }

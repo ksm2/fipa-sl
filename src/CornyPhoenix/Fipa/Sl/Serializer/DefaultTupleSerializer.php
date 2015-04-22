@@ -102,6 +102,16 @@ class DefaultTupleSerializer implements TupleSerializer
         while ($offset < strlen($content)) {
             $char = $content[$offset];
             switch ($char) {
+                // Skip whitespaces.
+                case " ":
+                case "\t":
+                case "\n":
+                case "\r":
+                case "\0":
+                case "\x0B":
+                    $offset++;
+                    break;
+
                 // Found a nested tuple.
                 case $this->context->getOpeningDelimiter():
                     $level = 0;
@@ -124,17 +134,9 @@ class DefaultTupleSerializer implements TupleSerializer
                 // Found a key.
                 case $this->context->getKeyDelimiter():
                     $offset++;
-                    preg_match('/(\w+)\s+/', $content, $matches, 0, $offset);
+                    preg_match('/(' . $this->context->getFrameRegEx() . '+)\s+/', $content, $matches, 0, $offset);
                     list($all, $key) = $matches;
                     $offset += strlen($all);
-                    break;
-
-                // Found a string.
-                case $this->context->getStringDelimiter():
-                    $pos = strpos($content, $this->context->getStringDelimiter(), $offset + 1);
-                    $this->foundNestedTuple($target, $content, $offset, $pos, $key, new StringTerm());
-                    $offset = $pos + 1;
-                    $key = null;
                     break;
 
                 // Found a number.
@@ -165,9 +167,13 @@ class DefaultTupleSerializer implements TupleSerializer
                     $offset++;
                     break;
 
+                // Found a string.
+                case $this->context->getStringDelimiter():
                 default:
-                    $offset++;
-                    break;
+                    $pos = $this->context->findEndOfString($content, $offset);
+                    $this->foundNestedTuple($target, $content, $offset, $pos - 1, $key, new StringTerm());
+                    $offset = $pos;
+                    $key = null;
             }
         }
     }
@@ -233,8 +239,9 @@ class DefaultTupleSerializer implements TupleSerializer
         // Get delimiter regex.
         $opening = $this->context->getOpeningDelimiterRegEx();
         $closing = $this->context->getClosingDelimiterRegEx();
+        $frameRegEx = $this->context->getFrameRegEx();
 
-        if (!preg_match('/^' . $opening . '\s*(\w+)\s+(.*)' . $closing . '$/', $string, $matches)) {
+        if (!preg_match(sprintf('/^%s\s*(%s+)\s+(.*)%s$/', $opening, $frameRegEx, $closing), $string, $matches)) {
             throw new ParsingException('Could not parse: ' . $string);
         }
 
