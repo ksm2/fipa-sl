@@ -113,6 +113,21 @@ class DefaultTupleSerializerTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($tuple->getTerms());
         $this->assertInstanceOf(StringTerm::class, $tuple->getTerms()[0]);
         $this->assertEquals('Hallo Welt ("Hello World")', $tuple->getString(0));
+
+        $tuple = $this->serializer->unserialize('(test-frame Hallo (Welt ))');
+        $this->assertNotEmpty($tuple->getTerms());
+        $this->assertInstanceOf(StringTerm::class, $tuple->getTerms()[0]);
+        $this->assertEquals('Hallo', $tuple->getString(0));
+
+        $tuple = $this->serializer->unserialize('(test-frame Hallo(Welt ))');
+        $this->assertNotEmpty($tuple->getTerms());
+        $this->assertInstanceOf(StringTerm::class, $tuple->getTerms()[0]);
+        $this->assertEquals('Hallo', $tuple->getString(0));
+
+        $tuple = $this->serializer->unserialize('(test-frame Hallo)');
+        $this->assertNotEmpty($tuple->getTerms());
+        $this->assertInstanceOf(StringTerm::class, $tuple->getTerms()[0]);
+        $this->assertEquals('Hallo', $tuple->getString(0));
     }
 
     /**

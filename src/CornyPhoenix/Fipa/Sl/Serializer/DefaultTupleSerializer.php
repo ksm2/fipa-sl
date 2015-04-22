@@ -171,10 +171,9 @@ class DefaultTupleSerializer implements TupleSerializer
                 case $this->context->getStringDelimiter():
                 default:
                     $pos = $this->context->findEndOfString($content, $offset);
-                    $this->foundNestedTuple($target, $content, $offset, $pos, $key, new StringTerm());
-                    $offset = $pos + 1;
+                    $this->foundNestedTuple($target, $content, $offset, $pos - 1, $key, new StringTerm());
+                    $offset = $pos;
                     $key = null;
-                    break;
             }
         }
     }

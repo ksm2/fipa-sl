@@ -118,11 +118,6 @@ class DefaultTupleContext implements TupleContext
         return $this->closing;
     }
 
-    public function getStringDelimiterRegEx()
-    {
-        return $this->string;
-    }
-
     /**
      * @return string
      */
@@ -139,6 +134,10 @@ class DefaultTupleContext implements TupleContext
      */
     public function encode($string)
     {
+        if (!$string) {
+            return '';
+        }
+
         $lower = strtolower($string);
         if ($lower === 'null' || $lower === 'false' || $lower === 'true') {
             return sprintf('%2$s%1$s%2$s', $string, $this->getStringDelimiter());
@@ -152,7 +151,7 @@ class DefaultTupleContext implements TupleContext
 
         // Wrap with string delimiter if needed.
         if ($containsWhitespace) {
-            $string = $this->getStringDelimiter() . $string . $this->getStringDelimiter();
+            return $this->getStringDelimiter() . $string . $this->getStringDelimiter();
         }
 
         return $string;
@@ -211,7 +210,7 @@ class DefaultTupleContext implements TupleContext
                 }
             } else {
                 // Break on parenthesis if not quoted.
-                if (preg_match(sprintf('[%s%s]', $this->opening, $this->closing), $c)) {
+                if (preg_match(sprintf('/[%s%s]/', $this->opening, $this->closing), $c)) {
                     break;
                 }
 

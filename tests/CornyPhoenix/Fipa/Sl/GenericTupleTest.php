@@ -57,12 +57,30 @@ class GenericTupleTest extends \PHPUnit_Framework_TestCase
         $tuple = new GenericTuple('frame');
 
         $this->assertFalse($tuple->containsTerm($term));
+        $this->assertCount(0, $tuple->getTerms());
 
         $tuple->addTerm($term);
         $this->assertTrue($tuple->containsTerm($term));
+        $this->assertCount(1, $tuple->getTerms());
 
         $tuple->removeTerm($term);
         $this->assertFalse($tuple->containsTerm($term));
+        $this->assertCount(0, $tuple->getTerms());
+
+        $tuple->addString('Foo');
+        $this->assertCount(1, $tuple->getTerms());
+
+        $tuple->addInt(42);
+        $this->assertCount(2, $tuple->getTerms());
+
+        $tuple->addFloat(1337.66);
+        $this->assertCount(3, $tuple->getTerms());
+
+        $tuple->addBool(true);
+        $this->assertCount(4, $tuple->getTerms());
+
+        $tuple->addNull();
+        $this->assertCount(5, $tuple->getTerms());
     }
 
     /**

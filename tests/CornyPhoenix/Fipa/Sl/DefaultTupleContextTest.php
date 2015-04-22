@@ -24,6 +24,7 @@ class DefaultTupleContextTest extends \PHPUnit_Framework_TestCase
 
     public function testEncode()
     {
+        $this->assertEquals('', $this->context->encode(''));
         $this->assertEquals('\(\)', $this->context->encode('()'));
         $this->assertEquals('"Hello World"', $this->context->encode('Hello World'));
         $this->assertEquals('"Hello \"World"', $this->context->encode('Hello "World'));
@@ -36,6 +37,7 @@ class DefaultTupleContextTest extends \PHPUnit_Framework_TestCase
 
     public function testDecode()
     {
+        $this->assertEquals('', $this->context->decode(''));
         $this->assertEquals('()', $this->context->decode('\(\)'));
         $this->assertEquals('Hello World', $this->context->decode('"Hello World"'));
         $this->assertEquals('Hello "World', $this->context->decode('"Hello \"World"'));
